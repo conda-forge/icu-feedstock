@@ -1,4 +1,4 @@
-{% set version = "56.1" %}
+{% set version = "57.1" %}
 {% set version_under = version.replace(".", "_") %}
 
 package:
@@ -8,15 +8,10 @@ package:
 source:
   fn:  icu4c-{{ version_under }}-src.tgz
   url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
-  md5: c4a2d71ff56aec5ebfab2a3f059be99d
-  patches:
-    # include an extra header when using mingw
-    - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
-    # omit lib prefix on libraries
-    - icu-config.patch                                 # [win]
+  sha256: ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581
 
 build:
-  number: 4
+  number: 0
   features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
@@ -24,8 +19,15 @@ build:
 
 requirements:
   build:
-    - python  # [win]
-    - toolchain
+    # at present, m2-* packages require manual addition of the msys2 channel
+    #    conda config --add channels http://repo.continuum.io/pkgs/msys2/
+    - m2-base     # [win]
+    - m2-bash     # [win]
+    - m2w64-binutils  # [win]
+    - m2-make     # [win]
+    # at present, this one is only on conda-forge
+    #    conda config --add channels conda-forge
+    - msinttypes        # [win and py<34]
 
 test:
   files:
