@@ -16,6 +16,7 @@ source:
     - icu-config.patch                                 # [win]
 
 build:
+  number: 1
   features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
@@ -23,7 +24,7 @@ build:
 
 requirements:
   build:
-    - python
+    - python  # [win]
 
 test:
   files:
