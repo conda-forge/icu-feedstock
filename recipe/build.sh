@@ -3,13 +3,19 @@
 cd source
 chmod +x configure install-sh
 
+EXTRA_OPTS=""
+if [ "$(uname)" == "Darwin" ];
+then
+    EXTRA_OPTS="--enable-rpath"
+fi
+
 ./configure --prefix="$PREFIX" \
-    --enable-rpath \
-    --disable-samples \
-    --disable-extras \
-    --disable-layout \
-    --disable-tests \
-    --enable-static
+            --disable-samples \
+            --disable-extras \
+            --disable-layout \
+            --disable-tests \
+            --enable-static \
+	    "${EXTRA_OPTS}"
 
 make -j$CPU_COUNT
 make check
