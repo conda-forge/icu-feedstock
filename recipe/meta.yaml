@@ -16,6 +16,7 @@ source:
     - icu-config.patch                                 # [win]
 
 build:
+  number: 1
   features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
@@ -23,7 +24,7 @@ build:
 
 requirements:
   build:
-    - python
+    - python  # [win]
 
 test:
   files:
@@ -46,13 +47,13 @@ test:
     {% endfor %}
 
     # CLI tests
-    - genbrk --help              # [unix]
-    - gencfu --help              # [unix]
-    - gencnval --help            # [unix]
-    - gendict --help             # [unix]
-    - icuinfo --help             # [unix]
-    - icu-config --help          # [unix]
-    - makeconv gb-18030-2000.ucm # [unix]
+    - genbrk --help               # [unix]
+    - gencfu --help               # [unix]
+    - gencnval --help             # [unix]
+    - gendict --help              # [unix]
+    - icuinfo --help              # [unix]
+    - icu-config --help           # [unix]
+    - makeconv gb-18030-2000.ucm  # [unix]
 
     # TODO: Windows tests
 

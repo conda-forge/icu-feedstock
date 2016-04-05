@@ -4,6 +4,7 @@ cd source
 chmod +x configure install-sh
 
 ./configure --prefix="$PREFIX" \
+    --enable-rpath \
     --disable-samples \
     --disable-extras \
     --disable-layout \
