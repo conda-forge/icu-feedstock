@@ -14,20 +14,9 @@ set "CXXFLAGS=%CXXFLAGS% -DU_HAVE_STDINT_H=1"
 set "CFLAGS=%CFLAGS% -DU_HAVE_STDINT_H=1"
 
 :: Set PATH to include msys2's binaries
-set "PATH=%LIBRARY_PREFIX%\usr\bin;%LIBRARY_PREFIX%\mingw-w64\bin"
+set "PATH=%PATH%;%LIBRARY_PREFIX%\usr\bin;%LIBRARY_PREFIX%\mingw-w64\bin"
 
-bash runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static --with-library-suffix=_static
-if errorlevel 1 exit 1
-make
-if errorlevel 1 exit 1
-make check
-if errorlevel 1 exit 1
-make install
-if errorlevel 1 exit 1
-
-make clean
-
-bash runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX%
+bash runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static
 if errorlevel 1 exit 1
 make
 if errorlevel 1 exit 1
@@ -37,6 +26,8 @@ make install
 if errorlevel 1 exit 1
 
 set LIBRARY_PREFIX=%LIBRARY_PREFIX:/=\%
+
+MOVE %LIBRARY_PREFIX%\lib\*.dll %LIBRARY_BIN%\
 
 :: Restore MSYS' link.exe
 MOVE %LIBRARY_PREFIX%\usr\bin\link.exe.backup %LIBRARY_PREFIX%\usr\bin\link.exe
