@@ -63,7 +63,11 @@ install:
     - cmd: conda config --add channels http://conda.binstar.org/conda-forge
     - cmd: conda config --add channels http://repo.continuum.io/pkgs/msys2
     - cmd: conda info
-    - cmd: conda install -n root --quiet --yes conda-build anaconda-client jinja2 setuptools
+    - cmd: conda install -n root --quiet --yes anaconda-client jinja2 setuptools
+    - cmd: git clone -b fix_win_vs2010 https://github.com/msarahan/conda-build
+    - cmd: pushd conda-build
+    - cmd: pip install --upgrade .
+    - cmd: popd
 
 # Skip .NET project specific build phase.
 build: off
