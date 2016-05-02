@@ -21,9 +21,9 @@ requirements:
   build:
     # at present, m2-* packages require manual addition of the msys2 channel
     #    conda config --add channels http://repo.continuum.io/pkgs/msys2/
-    - m2-msys2-base     # [win]
-    - m2-msys2-bash     # [win]
-    - m2-msys2-make     # [win]
+    - m2-base     # [win]
+    - m2-bash     # [win]
+    - m2-make     # [win]
     # at present, this one is only on conda-forge
     #    conda config --add channels conda-forge
     - msinttypes        # [win and py<34]
