@@ -23,6 +23,7 @@ requirements:
     #    conda config --add channels http://repo.continuum.io/pkgs/msys2/
     - m2-base     # [win]
     - m2-bash     # [win]
+    - m2w64-binutils  # [win]
     - m2-make     # [win]
     # at present, this one is only on conda-forge
     #    conda config --add channels conda-forge
