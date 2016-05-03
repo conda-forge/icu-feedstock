@@ -65,8 +65,7 @@ install:
     - cmd: conda config --add channels http://conda.binstar.org/conda-forge
     - cmd: conda config --add channels msys2
     - cmd: conda info
-
-    - cmd: conda install -n root --quiet --yes anaconda-client jinja2 setuptools m2-git
+    - cmd: conda install -n root --quiet --yes anaconda-client jinja2 setuptools m2-git m2-base
     - cmd: set "PATH=%CONDA_INSTALL_LOCN%\Library\usr\bin;%CONDA_INSTALL_LOCN%\Library\mingw-w64\bin;%PATH%"
     - cmd: git clone -b fix_win_vs2010 https://github.com/msarahan/conda-build
     - cmd: pushd conda-build && pip install --upgrade . && popd
