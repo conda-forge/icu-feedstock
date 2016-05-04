@@ -73,6 +73,9 @@ install:
 # Skip .NET project specific build phase.
 build: off
 
+artifacts:
+  - path: C:\conda\conda-bld\work\icu\source\config.log
+
 test_script:
     - "%CMD_IN_ENV% conda build recipe --quiet"
 deploy_script:
