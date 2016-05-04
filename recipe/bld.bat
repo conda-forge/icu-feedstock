@@ -17,6 +17,7 @@ set "CFLAGS=%CFLAGS% -DU_HAVE_STDINT_H=1"
 set "PATH=%PATH%;%LIBRARY_PREFIX%\usr\bin;%LIBRARY_PREFIX%\mingw-w64\bin"
 
 bash -x runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static
+appveyor PushArtifact C:\conda\conda-bld\work\icu\source\config.log
 if errorlevel 1 exit 1
 make
 if errorlevel 1 exit 1
