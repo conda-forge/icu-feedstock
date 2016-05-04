@@ -16,7 +16,7 @@ set "CFLAGS=%CFLAGS% -DU_HAVE_STDINT_H=1"
 :: Set PATH to include msys2's binaries
 set "PATH=%PATH%;%LIBRARY_PREFIX%\usr\bin;%LIBRARY_PREFIX%\mingw-w64\bin"
 
-bash runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static
+bash -x runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static
 if errorlevel 1 exit 1
 make
 if errorlevel 1 exit 1
