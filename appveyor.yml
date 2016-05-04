@@ -20,20 +20,20 @@ environment:
     secure: MP4hZYylDyUWEsrt3u3cod2sbFeRwUziH02mvQOdbjsTO/l1yIxDkP/76rSIjcGC
 
   matrix:
-    # - TARGET_ARCH: x86
-    #  CONDA_PY: 27
-    # - TARGET_ARCH: x64
-    #  CONDA_PY: 27
+    - TARGET_ARCH: x86
+      CONDA_PY: 27
+    - TARGET_ARCH: x64
+      CONDA_PY: 27
 
-    # - TARGET_ARCH: x86
-    #  CONDA_PY: 34
+    - TARGET_ARCH: x86
+      CONDA_PY: 34
     - TARGET_ARCH: x64
       CONDA_PY: 34
 
-    # - TARGET_ARCH: x86
-    #  CONDA_PY: 35
-    # - TARGET_ARCH: x64
-    #  CONDA_PY: 35
+    - TARGET_ARCH: x86
+      CONDA_PY: 35
+    - TARGET_ARCH: x64
+      CONDA_PY: 35
 
 
 # We always use a 64-bit machine, but can build x86 distributions
@@ -73,12 +73,8 @@ install:
 # Skip .NET project specific build phase.
 build: off
 
-artifacts:
-  - path: C:\conda\conda-bld\work\icu\source\config.log
-
 test_script:
     - "%CMD_IN_ENV% conda build recipe --quiet"
-    - appveyor PushArtifact C:\conda\conda-bld\work\icu\source\config.log
-deploy_script:
 
+deploy_script:
     - 'python ci_support\upload_or_check_non_existence.py .\recipe conda-forge --channel=main'
