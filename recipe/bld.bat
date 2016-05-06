@@ -17,7 +17,7 @@ set MSYS2_ARG_CONV_EXCL
 
 bash -x runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static
 
-set "MSYS2_ARG_CONV_EXCL=/AI;/AL;/OUT;%MSYS2_ARG_CONV_EXCL%"
+set "MSYS2_ARG_CONV_EXCL=/AI;/AL;/OUT"
 
 bash -x runConfigureICU MSYS/MSVC --prefix=%LIBRARY_PREFIX% --enable-static
 
