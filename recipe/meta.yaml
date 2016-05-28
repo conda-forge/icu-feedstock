@@ -9,6 +9,8 @@ source:
   fn:  icu4c-{{ version_under }}-src.tgz
   url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
   sha256: ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581
+  patches:
+    - 0001-fix-icudat.res-race-condition.patch
 
 build:
   number: 0
