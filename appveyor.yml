@@ -20,20 +20,20 @@ environment:
     secure: MP4hZYylDyUWEsrt3u3cod2sbFeRwUziH02mvQOdbjsTO/l1yIxDkP/76rSIjcGC
 
   matrix:
-    - TARGET_ARCH: x86
-      CONDA_PY: 27
-    - TARGET_ARCH: x64
-      CONDA_PY: 27
+    # - TARGET_ARCH: x86
+    #   CONDA_PY: 27
+    # - TARGET_ARCH: x64
+    #  CONDA_PY: 27
 
     - TARGET_ARCH: x86
       CONDA_PY: 34
     - TARGET_ARCH: x64
       CONDA_PY: 34
 
-    - TARGET_ARCH: x86
-      CONDA_PY: 35
-    - TARGET_ARCH: x64
-      CONDA_PY: 35
+    # - TARGET_ARCH: x86
+    #   CONDA_PY: 35
+    # - TARGET_ARCH: x64
+    #  CONDA_PY: 35
 
 
 # We always use a 64-bit machine, but can build x86 distributions
@@ -54,6 +54,8 @@ install:
 
     # Cywing's git breaks conda-build. (See https://github.com/conda-forge/conda-smithy-feedstock/pull/2.)
     - cmd: rmdir C:\cygwin /s /q
+    # Appveyor's git for windows contains cygwin and breaks this build
+    - cmd: rmdir "C:\Program Files\Git" /s /q
     - appveyor DownloadFile "https://raw.githubusercontent.com/pelson/Obvious-CI/master/bootstrap-obvious-ci-and-miniconda.py"
     - cmd: python bootstrap-obvious-ci-and-miniconda.py %CONDA_INSTALL_LOCN% %TARGET_ARCH% %CONDA_PY:~0,1% --without-obvci
     - cmd: set PATH=%CONDA_INSTALL_LOCN%;%CONDA_INSTALL_LOCN%\scripts;%PATH%
@@ -61,14 +63,18 @@ install:
 
     - cmd: conda install -c http://conda.binstar.org/pelson/channel/development --yes --quiet obvious-ci
     - cmd: conda config --add channels http://conda.binstar.org/conda-forge
+    - cmd: conda config --add channels msys2
     - cmd: conda info
-    - cmd: conda install -n root --quiet --yes conda-build anaconda-client jinja2 setuptools
+    - cmd: conda install -n root --quiet --yes anaconda-client jinja2 setuptools m2-git m2-base
+    - cmd: set "PATH=%CONDA_INSTALL_LOCN%\Library\usr\bin;%CONDA_INSTALL_LOCN%\Library\mingw-w64\bin;%PATH%"
+    - cmd: git clone -b fix_win_vs2010 https://github.com/msarahan/conda-build
+    - cmd: pushd conda-build && pip install --upgrade . && popd
 
 # Skip .NET project specific build phase.
 build: off
 
 test_script:
     - "%CMD_IN_ENV% conda build recipe --quiet"
-deploy_script:
 
+deploy_script:
     - 'python ci_support\upload_or_check_non_existence.py .\recipe conda-forge --channel=main'
