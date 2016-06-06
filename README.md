@@ -5,7 +5,7 @@ Home: http://site.icu-project.org/
 
 Package license: MIT
 
-Feedstock license: BSD
+Feedstock license: BSD 3-Clause
 
 Summary: International Components for Unicode
 
@@ -69,6 +69,7 @@ Terminology
 
 Current build status
 ====================
+
 Linux: [![Circle CI](https://circleci.com/gh/conda-forge/icu-feedstock.svg?style=svg)](https://circleci.com/gh/conda-forge/icu-feedstock)
 OSX: [![TravisCI](https://travis-ci.org/conda-forge/icu-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/icu-feedstock) 
 Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/icu-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/icu-feedstock/branch/master)
