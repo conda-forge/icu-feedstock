@@ -2,73 +2,67 @@
 {% set version_under = version.replace(".", "_") %}
 
 package:
-  name: icu
-  version: {{ version }}
+    name: icu
+    version: {{ version }}
 
 source:
-  fn:  icu4c-{{ version_under }}-src.tgz
-  url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
-  sha256: ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581
-  patches:
-    - 0001-fix-icudat.res-race-condition.patch
+    fn:  icu4c-{{ version_under }}-src.tgz
+    url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
+    sha256: ff8c67cb65949b1e7808f2359f2b80f722697048e90e7cfc382ec1fe229e9581
+    patches:
+        - 0001-fix-icudat.res-race-condition.patch
 
 build:
-  number: 0
-  features:
-    - vc9     # [win and py27]
-    - vc10    # [win and py34]
-    - vc14    # [win and py35]
+    number: 0
+    features:
+        - vc9  # [win and py27]
+        - vc10  # [win and py34]
+        - vc14  # [win and py35]
 
 requirements:
-  build:
-    # at present, m2-* packages require manual addition of the msys2 channel
-    #    conda config --add channels http://repo.continuum.io/pkgs/msys2/
-    - m2-base     # [win]
-    - m2-bash     # [win]
-    - m2w64-binutils  # [win]
-    - m2-make     # [win]
-    # at present, this one is only on conda-forge
-    #    conda config --add channels conda-forge
-    - msinttypes        # [win and py<34]
+    build:
+        - posix  # [win]
+        - m2w64-binutils  # [win]
+        - msinttypes  # [win and py<34]
 
 test:
-  files:
-    - gb-18030-2000.ucm  # from http://source.icu-project.org/repos/icu/data/trunk/charset/data/ucm/gb-18030-2000.ucm
-    - de.txt          # from ICU's data folder
-  commands:
-    # Libraries
-    {% set libs = [
-       "libicudata",
-       "libicui18n",
-       "libicuio",
-       "libicutest",
-       "libicutu",
-       "libicuuc"
-     ] %}
-    {% for each_lib in libs %}
-    - test -f $PREFIX/lib/{{ each_lib }}.a                                                 # [unix]
-    - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib                               # [osx]
-    - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}                                  # [linux]
-    {% endfor %}
-
-    # CLI tests
-    - genbrk --help               # [unix]
-    - gencfu --help               # [unix]
-    - gencnval --help             # [unix]
-    - gendict --help              # [unix]
-    - icuinfo --help              # [unix]
-    - icu-config --help           # [unix]
-    - makeconv gb-18030-2000.ucm  # [unix]
-
-    # TODO: Windows tests
+    files:
+        # http://source.icu-project.org/repos/icu/data/trunk/charset/data/ucm/gb-18030-2000.ucm
+        - gb-18030-2000.ucm
+        - de.txt  # From ICU's data folder.
+    commands:
+        # Libraries.
+        {% set libs = [
+            "libicudata",
+            "libicui18n",
+            "libicuio",
+            "libicutest",
+            "libicutu",
+            "libicuuc"
+            ] %}
+        {% for each_lib in libs %}
+        - test -f $PREFIX/lib/{{ each_lib }}.a                    # [unix]
+        - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib  # [osx]
+        - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}     # [linux]
+        {% endfor %}
+        # CLI tests.
+        - genbrk --help               # [unix]
+        - gencfu --help               # [unix]
+        - gencnval --help             # [unix]
+        - gendict --help              # [unix]
+        - icuinfo --help              # [unix]
+        - icu-config --help           # [unix]
+        - makeconv gb-18030-2000.ucm  # [unix]
+        - conda inspect linkages -n _test icu  # [linux]
 
 about:
-  home: http://site.icu-project.org/
-  license: MIT
-  summary: International Components for Unicode
+    home: http://site.icu-project.org/
+    license: MIT
+    summary: 'International Components for Unicode.'
 
 extra:
-  recipe-maintainers:
-    - ccordoba12
-    - jakirkham
-    - msarahan
+    recipe-maintainers:
+        - ccordoba12
+        - jakirkham
+        - msarahan
+        - ocefpaf
