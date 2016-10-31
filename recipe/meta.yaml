@@ -1,4 +1,4 @@
-{% set version = "56.1" %}
+{% set version = "58.1" %}
 {% set version_under = version.replace(".", "_") %}
 
 package:
@@ -8,7 +8,7 @@ package:
 source:
   fn:  icu4c-{{ version_under }}-src.tgz
   url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
-  md5: c4a2d71ff56aec5ebfab2a3f059be99d
+  sha256: 0eb46ba3746a9c2092c8ad347a29b1a1b4941144772d13a88667a7b11ea30309
   patches:
     # include an extra header when using mingw
     - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
@@ -16,7 +16,7 @@ source:
     - icu-config.patch                                 # [win]
 
 build:
-  number: 4
+  number: 0
   features:
     - vc9     # [win and py27]
     - vc10    # [win and py34]
@@ -58,13 +58,17 @@ test:
 
     # TODO: Windows tests
 
+    #- conda inspect linkages -p $PREFIX icu  # [not win]
+    #- conda inspect objects -p $PREFIX icu  # [osx]
+
 about:
   home: http://site.icu-project.org/
   license: MIT
-  summary: International Components for Unicode
+  summary: 'International Components for Unicode.'
 
 extra:
   recipe-maintainers:
     - ccordoba12
     - jakirkham
     - msarahan
+    - ocefpaf
