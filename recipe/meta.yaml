@@ -53,7 +53,6 @@ test:
         - icuinfo --help              # [unix]
         - icu-config --help           # [unix]
         - makeconv gb-18030-2000.ucm  # [unix]
-        - conda inspect linkages -n _test icu  # [linux]
 
 about:
     home: http://site.icu-project.org/
