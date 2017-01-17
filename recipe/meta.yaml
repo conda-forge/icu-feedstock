@@ -17,19 +17,30 @@ source:
 
 build:
   number: 0
+  skip: True  # [win and py36]
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
-    - vc14  # [win and py35]
+    - vc14  # [win and py>=35]
 
 requirements:
   build:
     - python  # [win]
+    - toolchain
+    - vc 9  # [win and py27]
+    - vc 10  # [win and py34]
+    - vc 14  # [win and py>=35]
+  run:
+    - vc 9  # [win and py27]
+    - vc 10  # [win and py34]
+    - vc 14  # [win and py>=35]
 
 test:
   files:
-    - gb-18030-2000.ucm  # from http://source.icu-project.org/repos/icu/data/trunk/charset/data/ucm/gb-18030-2000.ucm
-    - de.txt          # from ICU's data folder
+    # From http://source.icu-project.org/repos/icu/data/trunk/charset/data/ucm/gb-18030-2000.ucm
+    - gb-18030-2000.ucm
+    # From ICU's data folder.
+    - de.txt
   commands:
     # Libraries
     {% set libs = [
@@ -41,25 +52,22 @@ test:
        "libicuuc"
      ] %}
     {% for each_lib in libs %}
-    - test -f $PREFIX/lib/{{ each_lib }}.a                                                 # [unix]
-    - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib                               # [osx]
-    - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}                                  # [linux]
+    - test -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
+    - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib   # [osx]
+    - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}  # [linux]
     {% endfor %}
 
     # CLI tests
-    - genbrk --help               # [unix]
-    - gencfu --help               # [unix]
-    - gencnval --help             # [unix]
-    - gendict --help              # [unix]
-    - icuinfo --help              # [unix]
-    - icu-config --help           # [unix]
-    - makeconv gb-18030-2000.ucm  # [unix]
+    - genbrk --help  # [not win]
+    - gencfu --help  # [not win]
+    - gencnval --help  # [not win]
+    - gendict --help  # [not win]
+    - icuinfo --help  # [not win]
+    - icu-config --help  # [not win]
+    - makeconv gb-18030-2000.ucm  # [not win]
 
     - conda inspect linkages -p $PREFIX icu  # [not win]
     - conda inspect objects -p $PREFIX icu  # [osx]
-
-    #- conda inspect linkages -p $PREFIX icu  # [not win]
-    #- conda inspect objects -p $PREFIX icu  # [osx]
 
 about:
   home: http://site.icu-project.org/
