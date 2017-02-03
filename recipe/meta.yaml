@@ -20,6 +20,7 @@ source:
 
 build:
   number: 1
+  skip: True  # [win and py36]
   features:
     - vc9  # [win and py27]
     - vc10  # [win and py34]
