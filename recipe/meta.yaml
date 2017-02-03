@@ -14,6 +14,9 @@ source:
     - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
     # Omit lib prefix on libraries.
     - icu-config.patch  # [win]
+    # configure uses /W4 when it shouldn't which breaks things (ie link steps)
+    # Given we aren't interested in warnings, remove it
+    - configure_msvc.patch  # [win]
 
 build:
   number: 1
@@ -25,6 +28,8 @@ build:
 requirements:
   build:
     - python  # [win]
+    - m2-base  # [win]
+    - m2-make  # [win]
     - toolchain
     - vc 9  # [win and py27]
     - vc 10  # [win and py34]

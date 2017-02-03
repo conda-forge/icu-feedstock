@@ -1,24 +1,15 @@
-if "%ARCH%"=="32" (
-   set ARCH=Win32
-   set COPYSUFFIX=
-) else (
-  set ARCH=x64
-  set COPYSUFFIX=64
-)
 
-:: Need to move a more current msbuild into PATH.  The one on AppVeyor barfs on the solution
-::     This one comes from the Win7 SDK (.net 4.0), and is known to work.
-if %VS_MAJOR% == 9 (
-    COPY C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe .\
-    set "PATH=%CD%;%PATH%"
-)
+cd source
 
-msbuild source\allinone\allinone.sln /p:Configuration=Release;Platform=%ARCH%
+:: Can't seem to determine msys2 due to bug in config.guess,
+:: BUT runConfigureICU expects cygwin, so we just pretend we are
+bash runConfigureICU Cygwin/MSVC --build=x86_64-pc-cygwin --prefix=%CYGWIN_PREFIX%
+:: Ignore errorlevel - there are warnings about various things missing
+:: which we don't actually seem to need. Just keep going...
+::if errorlevel 1 exit 1
+
+make -j%CPU_COUNT%
 if errorlevel 1 exit 1
 
-ROBOCOPY bin%COPYSUFFIX% %LIBRARY_BIN% *.dll /E
-if %ERRORLEVEL% LSS 8 exit 0
-ROBOCOPY lib%COPYSUFFIX% %LIBRARY_LIB% *.lib /E
-if %ERRORLEVEL% LSS 8 exit 0
-ROBOCOPY include %LIBRARY_inc% * /E
-if %ERRORLEVEL% LSS 8 exit 0
+make install
+if errorlevel 1 exit 1
