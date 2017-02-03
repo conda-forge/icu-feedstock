@@ -1,9 +1,12 @@
 
 cd source
 
+:: I don't understand but running rc.exe fails without this...
+set MSYS_RC_MODE=1
+
 :: Can't seem to determine msys2 due to bug in config.guess,
 :: BUT runConfigureICU expects cygwin, so we just pretend we are
-bash runConfigureICU Cygwin/MSVC --build=x86_64-pc-cygwin --prefix=%CYGWIN_PREFIX%
+bash runConfigureICU Cygwin/MSVC --build=x86_64-pc-cygwin --prefix=${CYGWIN_PREFIX}/Library
 :: Ignore errorlevel - there are warnings about various things missing
 :: which we don't actually seem to need. Just keep going...
 ::if errorlevel 1 exit 1
