@@ -16,7 +16,7 @@ source:
     - icu-config.patch  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win and py36]
   features:
     - vc9  # [win and py27]
@@ -26,6 +26,8 @@ build:
 requirements:
   build:
     - python  # [win]
+    - m2-base  # [win]
+    - m2-make  # [win]
     - toolchain
     - vc 9  # [win and py27]
     - vc 10  # [win and py34]
@@ -58,13 +60,13 @@ test:
     {% endfor %}
 
     # CLI tests
-    - genbrk --help  # [not win]
-    - gencfu --help  # [not win]
-    - gencnval --help  # [not win]
-    - gendict --help  # [not win]
-    - icuinfo --help  # [not win]
+    - genbrk --help
+    - gencfu --help
+    - gencnval --help
+    - gendict --help
+    - icuinfo --help
     - icu-config --help  # [not win]
-    - makeconv gb-18030-2000.ucm  # [not win]
+    - makeconv gb-18030-2000.ucm
 
     - conda inspect linkages -p $PREFIX icu  # [not win]
     - conda inspect objects -p $PREFIX icu  # [osx]
