@@ -1,4 +1,4 @@
-{% set version = "58.1" %}
+{% set version = "58.2" %}
 {% set version_under = version.replace(".", "_") %}
 
 package:
@@ -6,9 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  fn:  icu4c-{{ version_under }}-src.tgz
   url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
-  sha256: 0eb46ba3746a9c2092c8ad347a29b1a1b4941144772d13a88667a7b11ea30309
+  sha256: 2b0a4410153a9b20de0e20c7d8b66049a72aef244b53683d0d7521371683da0c
   patches:
     # Include an extra header when using mingw.
     - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
@@ -16,12 +15,11 @@ source:
     - icu-config.patch  # [win]
 
 build:
-  number: 1
+  number: 0
   skip: True  # [win and py36]
   features:
     - vc9  # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py>=35]
+    - vc14  # [win and (py35 or py36)]
 
 requirements:
   build:
@@ -30,12 +28,10 @@ requirements:
     - m2-make  # [win]
     - toolchain
     - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py>=35]
+    - vc 14  # [win and (py35 or py36)]
   run:
     - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py>=35]
+    - vc 14  # [win and (py35 or py36)]
 
 test:
   files:
@@ -67,13 +63,13 @@ test:
     - icuinfo --help
     - icu-config --help  # [not win]
     - makeconv gb-18030-2000.ucm
-
-    - conda inspect linkages -p $PREFIX icu  # [not win]
-    - conda inspect objects -p $PREFIX icu  # [osx]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
 about:
   home: http://site.icu-project.org/
   license: MIT
+  license_file: LICENSE
   summary: 'International Components for Unicode.'
 
 extra:
