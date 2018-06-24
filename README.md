@@ -14,14 +14,16 @@ Summary: International Components for Unicode.
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/icu-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/icu-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/icu-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/icu-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/icu-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/icu-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/icu-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/icu-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/icu-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/icu-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/icu-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/icu-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/icu/badges/version.svg)](https://anaconda.org/conda-forge/icu)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/icu/badges/downloads.svg)](https://anaconda.org/conda-forge/icu)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-icu-green.svg)](https://anaconda.org/conda-forge/icu) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/icu.svg)](https://anaconda.org/conda-forge/icu) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/icu.svg)](https://anaconda.org/conda-forge/icu) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/icu.svg)](https://anaconda.org/conda-forge/icu) |
 
 Installing icu
 ==============
