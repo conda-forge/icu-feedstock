@@ -15,16 +15,17 @@ source:
     - icu-config.patch  # [win]
 
 build:
-  number: 0
+  number: 1
+  run_exports:
+    # icu changes their file extension with each major rev.  Default pin OK.
+    - {{ pin_subpackage('icu') }}
 
 requirements:
   build:
-    - m2-base  # [win]
-    - m2-make  # [win]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-  host:
-  run:
+    - m2-base  # [win]
+    - m2-make  # [win]
 
 test:
   files:
@@ -62,8 +63,14 @@ test:
 about:
   home: http://site.icu-project.org/
   license: MIT
-  license_file: LICENSE
-  summary: 'International Components for Unicode.'
+  summary: 'International Components for Unicode'
+  description: |
+    ICU is a mature, widely used set of C/C++ and Java libraries providing
+    Unicode and Globalization support for software applications. ICU is
+    widely portable and gives applications the same results on all platforms
+    and between C/C++ and Java software.
+  doc_url: http://site.icu-project.org/design
+  dev_url: http://source.icu-project.org/repos/icu/
 
 extra:
   recipe-maintainers:
