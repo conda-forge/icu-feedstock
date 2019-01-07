@@ -23,6 +23,7 @@ requirements:
     - m2-make  # [win]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make     # [unix]
   host:
   run:
 
