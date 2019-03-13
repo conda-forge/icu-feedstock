@@ -39,7 +39,7 @@ if "%ARCH%"=="32" (
 :: which we don't actually seem to need. Just keep going...
 ::if errorlevel 1 exit 1
 
-make -j%CPU_COUNT%
+make
 :: Run make twice. There is some timing issue between msys2 and rc.exe
 :: that means that directories are created after they are required...
 make
