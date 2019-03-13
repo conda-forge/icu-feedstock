@@ -42,7 +42,8 @@ if "%ARCH%"=="32" (
 make -j%CPU_COUNT%
 :: Run make twice. There is some timing issue between msys2 and rc.exe
 :: that means that directories are created after they are required...
-make -j%CPU_COUNT%
+make
+make
 if errorlevel 1 exit 1
 
 make install
