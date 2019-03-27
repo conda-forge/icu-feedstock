@@ -20,41 +20,24 @@ set MSYS_RC_MODE=1
 :: .. without this
 if "%ARCH%"=="32" (
   if "%c_compiler%"=="vs2015" (
-    set DISABLE_EXTRAS=--disable-extras
+    set EXTRA_OPTS=--disable-extras
   )
 )
 
-:: Can't seem to determine msys2 due to bug in config.guess,
-:: BUT runConfigureICU expects cygwin, so we just pretend we are
-:: The prefix looks strange but it seems we are chrooted into almost the right
-:: place by msys2, but can't write to the directories we need - fix up below
-if "%ARCH%"=="32" (
-  FOR /F "delims=" %%i IN ('cygpath.exe -u "%LIBRARY_PREFIX%"') DO set "CYGWIN_LIBRARY_PREFIX=%%i"
-  bash runConfigureICU Cygwin/MSVC --build=x86_64-pc-cygwin --prefix=!CYGWIN_LIBRARY_PREFIX!/icu %DISABLE_EXTRAS%
-) else (
-  bash runConfigureICU Cygwin/MSVC --build=x86_64-pc-cygwin --prefix=/icu %DISABLE_EXTRAS%
-)
+set BUILD=x86_64-pc-cygwin
+set HOST=x86_64-pc-cygwin
+cd ..
 
-:: Ignore errorlevel - there are warnings about various things missing
-:: which we don't actually seem to need. Just keep going...
-::if errorlevel 1 exit 1
+copy "%RECIPE_DIR%\build.sh" .
+set MSYSTEM=MINGW%ARCH%
+set MSYS2_PATH_TYPE=inherit
+set CHERE_INVOKING=1
+FOR /F "delims=" %%i in ('cygpath.exe -u "%LIBRARY_PREFIX%"') DO set "PREFIX=%%i"
 
-make
-:: Run make twice. There is some timing issue between msys2 and rc.exe
-:: that means that directories are created after they are required...
-make install || make install
-if errorlevel 1 exit 1
+set CC=cl.exe
+set CXX=cl.exe
 
-:: Fix up for not being able to write into the root path with msys2
-xcopy /e /i %LIBRARY_PREFIX%\icu\lib %LIBRARY_LIB%
-if errorlevel 1 exit 1
-xcopy /e /i %LIBRARY_PREFIX%\icu\bin %LIBRARY_BIN%
-if errorlevel 1 exit 1
-xcopy /e /i %LIBRARY_PREFIX%\icu\include %LIBRARY_INC%
-if errorlevel 1 exit 1
-xcopy /e /i %LIBRARY_PREFIX%\icu\share %LIBRARY_PREFIX%\share
-if errorlevel 1 exit 1
-rmdir /s /q %LIBRARY_PREFIX%\icu
+bash -lc "./build.sh"
 if errorlevel 1 exit 1
 
 :: The .dlls end up in the wrong place
