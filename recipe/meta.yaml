@@ -16,6 +16,7 @@ source:
 
   - url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-data.zip
     sha256: 68f42ad0c9e0a5a5af8eba0577ba100833912288bad6e4d1f42ff480bbcfd4a9
+    folder: source/data
 
 build:
   number: 1000
