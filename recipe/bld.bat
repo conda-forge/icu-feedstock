@@ -42,11 +42,7 @@ if "%ARCH%"=="32" (
 make
 :: Run make twice. There is some timing issue between msys2 and rc.exe
 :: that means that directories are created after they are required...
-make
-make
-if errorlevel 1 exit 1
-
-make install
+make install || make install
 if errorlevel 1 exit 1
 
 :: Fix up for not being able to write into the root path with msys2
