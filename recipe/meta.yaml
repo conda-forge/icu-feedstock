@@ -19,7 +19,7 @@ source:
     folder: source/data
 
 build:
-  number: 1000
+  number: 0
   run_exports:
     # icu changes their file extension with each major rev.  Default pin OK.
     - {{ pin_subpackage('icu') }}
