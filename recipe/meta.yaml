@@ -1,4 +1,4 @@
-{% set version = "60.2" %}
+{% set version = "64.2" %}
 {% set version_under = version.replace(".", "_") %}
 
 package:
@@ -7,19 +7,20 @@ package:
 
 source:
   - url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-src.tgz
-    sha256: f073ea8f35b926d70bb33e6577508aa642a8b316a803f11be20af384811db418
+    sha256: 627d5d8478e6d96fc8c90fed4851239079a561a6a8b9e48b0892f24e82d31d6c
     patches:
       # Include an extra header when using mingw.
       - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
       # Omit lib prefix on libraries.
       - icu-config.patch  # [win]
+      - mach-port-t.patch  # [osx]
 
   - url: http://download.icu-project.org/files/icu4c/{{ version }}/icu4c-{{ version_under }}-data.zip
-    sha256: 68f42ad0c9e0a5a5af8eba0577ba100833912288bad6e4d1f42ff480bbcfd4a9
+    sha256: fba0e89f5b3f285d722a83317647bffee69b6f1eb8d067d5da03c5677c45e510
     folder: source/data
 
 build:
-  number: 1
+  number: 0
   run_exports:
     # icu changes their file extension with each major rev.  Default pin OK.
     - {{ pin_subpackage('icu') }}
