@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd source
 
 chmod +x configure install-sh
