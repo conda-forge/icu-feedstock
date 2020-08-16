@@ -31,6 +31,7 @@ requirements:
   build:
     - m2-base  # [win]
     - m2-make  # [win]
+    - libtool  # [unix]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make     # [unix]
