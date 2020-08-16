@@ -13,7 +13,7 @@ EXTRA_OPTS=""
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     mkdir cross_build
     pushd cross_build
-    CC=$CC_FOR_BUILD $CXX=$CXX_FOR_BUILD AR= AS= LD= CFLAGS= CXXFLAGS= LDFLAGS= CPPFLAGS= ./configure \
+    CC=$CC_FOR_BUILD CXX=$CXX_FOR_BUILD AR= AS= LD= CFLAGS= CXXFLAGS= LDFLAGS= CPPFLAGS= ./configure \
       --build=${BUILD} \
       --host=${BUILD} \
       --disable-samples \
