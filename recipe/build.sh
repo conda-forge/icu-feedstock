@@ -21,8 +21,8 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
       --disable-layout \
       --disable-tests
     make -j${CPU_COUNT}
+    EXTRA_OPTS="$EXTRA_OPTS --with-cross-build=$PWD"
     popd
-    EXTRA_OPTS="$EXTRA_OPTS --with-cross-build=$SRC_DIR/cross_build"
 fi
 
 if [[ ${HOST} =~ .*darwin.* ]]; then
