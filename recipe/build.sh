@@ -36,7 +36,7 @@ fi
             --disable-extras      \
             --disable-layout      \
             --disable-tests       \
-            "${EXTRA_OPTS}"
+            ${EXTRA_OPTS}
 
 make -j${CPU_COUNT} ${VERBOSE_CM}
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
