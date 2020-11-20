@@ -5,11 +5,9 @@ Home: http://site.icu-project.org/
 
 Package license: MIT
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/icu-feedstock/blob/master/LICENSE.txt)
 
 Summary: International Components for Unicode.
-
-
 
 Current build status
 ====================
@@ -188,4 +186,5 @@ Feedstock Maintainers
 * [@jakirkham](https://github.com/jakirkham/)
 * [@msarahan](https://github.com/msarahan/)
 * [@ocefpaf](https://github.com/ocefpaf/)
+* [@xhochy](https://github.com/xhochy/)
 
