@@ -4,6 +4,7 @@ Date: Mon, 7 Nov 2022 10:34:44 -0800
 Subject: [PATCH] ICU-22191 writesrc.cpp: enable PRI formatting constants on
  all compilers
 
+(note from minrk: includes changes from upstream PR #2239 and PR #2250)
 ---
  icu4c/source/tools/toolutil/writesrc.cpp | 9 +++++++++
  1 file changed, 9 insertions(+)
@@ -13,8 +14,9 @@ index 4675a653b32..20ad74aa8b2 100644
 --- a/icu4c/source/tools/toolutil/writesrc.cpp
 +++ b/icu4c/source/tools/toolutil/writesrc.cpp
 @@ -20,7 +20,16 @@
- 
+
  #include <stdio.h>
+-#include <inttypes.h>
  #include <time.h>
 +
 +// The C99 standard suggested that C++ implementations not define PRId64 etc. constants
@@ -24,7 +26,7 @@ index 4675a653b32..20ad74aa8b2 100644
 +#ifndef __STDC_FORMAT_MACROS
 +#   define __STDC_FORMAT_MACROS
 +#endif
- #include <cinttypes>
++ #include <cinttypes>
 +
  #include "unicode/utypes.h"
  #include "unicode/putil.h"
