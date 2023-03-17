@@ -15,6 +15,7 @@ source:
       # Omit lib prefix on libraries.
       - icu-config.patch  # [win]
       - mach-port-t.patch  # [osx]
+      - 2250.patch
 
   - url: https://github.com/unicode-org/icu/releases/download/release-{{ version_hyphen }}/icu4c-{{ version_under }}-data.zip
     sha256: ee19f876507d6c23d9e0a2b631096f6b0eaa6fa61728c33a89efdb55e3385dea
