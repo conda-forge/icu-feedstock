@@ -1,17 +1,17 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 c_compiler:
-- clang
+- clang_bootstrap
 c_compiler_version:
-- '12'
+- '14'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- clang_bootstrap
 cxx_compiler_version:
-- '12'
+- '14'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 target_platform:
