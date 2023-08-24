@@ -3,11 +3,15 @@ About icu-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/icu-feedstock/blob/main/LICENSE.txt)
 
-Home: http://site.icu-project.org/
+Home: https://icu.unicode.org
 
 Package license: MIT
 
 Summary: International Components for Unicode.
+
+Development: https://github.com/unicode-org/icu
+
+Documentation: https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/
 
 Current build status
 ====================
