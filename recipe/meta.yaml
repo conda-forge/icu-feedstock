@@ -54,7 +54,8 @@ test:
        "libicuuc"
      ] %}
     {% for each_lib in libs %}
-    - test -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
+    # https://github.com/conda-forge/icu-feedstock/issues/40
+    # - test -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
     - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib   # [osx]
     - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}  # [linux]
     {% endfor %}
@@ -69,10 +70,12 @@ test:
     - makeconv gb-18030-2000.ucm
 
 about:
-  home: http://site.icu-project.org/
+  home: https://icu.unicode.org
   license: MIT
   license_file: LICENSE
   summary: International Components for Unicode.
+  dev_url: https://github.com/unicode-org/icu
+  doc_url: https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/
 
 extra:
   recipe-maintainers:
