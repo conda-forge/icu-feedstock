@@ -1,4 +1,4 @@
-{% set version = "72.1" %}
+{% set version = "73.2" %}
 {% set version_under = version.replace(".", "_") %}
 {% set version_hyphen = version.replace(".", "-") %}
 
@@ -8,17 +8,16 @@ package:
 
 source:
   - url: https://github.com/unicode-org/icu/releases/download/release-{{ version_hyphen }}/icu4c-{{ version_under }}-src.tgz
-    sha256: a2d2d38217092a7ed56635e34467f92f976b370e20182ad325edea6681a71d68
+    sha256: 818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1
     patches:
       # Include an extra header when using mingw.
       - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
       # Omit lib prefix on libraries.
       - icu-config.patch  # [win]
       - mach-port-t.patch  # [osx]
-      - 2250.patch
 
   - url: https://github.com/unicode-org/icu/releases/download/release-{{ version_hyphen }}/icu4c-{{ version_under }}-data.zip
-    sha256: ee19f876507d6c23d9e0a2b631096f6b0eaa6fa61728c33a89efdb55e3385dea
+    sha256: ca1ee076163b438461e484421a7679fc33a64cd0a54f9d4b401893fa1eb42701
     folder: source/data
 
 build:
@@ -55,7 +54,8 @@ test:
        "libicuuc"
      ] %}
     {% for each_lib in libs %}
-    - test -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
+    # https://github.com/conda-forge/icu-feedstock/issues/40
+    - test ! -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
     - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib   # [osx]
     - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}  # [linux]
     {% endfor %}
@@ -70,10 +70,12 @@ test:
     - makeconv gb-18030-2000.ucm
 
 about:
-  home: http://site.icu-project.org/
+  home: https://icu.unicode.org
   license: MIT
   license_file: LICENSE
   summary: International Components for Unicode.
+  dev_url: https://github.com/unicode-org/icu
+  doc_url: https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/
 
 extra:
   recipe-maintainers:
