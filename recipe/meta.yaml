@@ -55,7 +55,7 @@ test:
      ] %}
     {% for each_lib in libs %}
     # https://github.com/conda-forge/icu-feedstock/issues/40
-    # - test -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
+    - test ! -f $PREFIX/lib/{{ each_lib }}.a  # [not win]
     - test -f $PREFIX/lib/{{ each_lib }}.{{ version }}.dylib   # [osx]
     - test -f $PREFIX/lib/{{ each_lib }}.so.{{ version }}  # [linux]
     {% endfor %}
