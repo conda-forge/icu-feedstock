@@ -32,6 +32,7 @@ requirements:
     - m2-make  # [win]
     - libtool  # [unix]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - make     # [unix]
   host:
