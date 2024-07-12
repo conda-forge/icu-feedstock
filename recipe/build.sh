@@ -6,7 +6,7 @@ set -ex
 
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
-  export PATH="$(basename $(which -a link | grep MSVC)):$PATH"
+  export PATH="$(basename $(which -a link | grep MSVC)):$PATH"
   export CXXFLAGS="$CXXFLAGS /std:c++17"
 fi
 
