@@ -4,6 +4,9 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
+link --version
+exit 1
+
 cd source
 
 chmod +x configure install-sh
