@@ -4,22 +4,10 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
-export
-
-sleep 10
-
-echo $PATH
-
-sleep 10
-
-which -a link
-
-sleep 10
-
-export PATH="$ORIGINAL_PATH:$PATH"
-
-link --version
-exit 1
+if [[ "${target_platform}" == win-* ]]; then
+  # Ensure that MSVC come before MSYS2
+  export PATH="$ORIGINAL_PATH:$PATH"
+fi
 
 cd source
 
