@@ -4,6 +4,8 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
+which -a link
+
 link --version
 exit 1
 
