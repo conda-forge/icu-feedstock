@@ -16,6 +16,8 @@ which -a link
 
 sleep 10
 
+export PATH="$ORIGINAL_PATH:$PATH"
+
 link --version
 exit 1
 
