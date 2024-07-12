@@ -7,6 +7,7 @@ set -ex
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
   export PATH="$ORIGINAL_PATH:$PATH"
+  export CXXFLAGS="$CXXFLAGS /std:c++17"
 fi
 
 cd source
