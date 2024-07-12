@@ -4,7 +4,17 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
+export
+
+sleep 10
+
+echo $PATH
+
+sleep 10
+
 which -a link
+
+sleep 10
 
 link --version
 exit 1
