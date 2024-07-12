@@ -2,7 +2,7 @@
 # Get an updated config.sub and config.guess
 cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
-set -e
+set -ex
 
 cd source
 
@@ -36,7 +36,7 @@ fi
             --disable-extras      \
             --disable-layout      \
             --disable-tests       \
-            ${EXTRA_OPTS}
+	    ${EXTRA_OPTS}  || (cat config.log; exit 1)
 
 make -j${CPU_COUNT} ${VERBOSE_CM}
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
