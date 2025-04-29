@@ -17,8 +17,7 @@ set MSYS_RC_MODE=1
 :: This directory is needed during the install process but isn't created by the scripts.
 mkdir data\out\tmp
 
-set BUILD=x86_64-pc-cygwin
-set HOST=x86_64-pc-cygwin
+echo "build - %build_platform% - %BUILD_PLATFORM%"
 cd ..
 
 copy "%RECIPE_DIR%\build.sh" .
