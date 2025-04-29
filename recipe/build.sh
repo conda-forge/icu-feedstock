@@ -14,6 +14,18 @@ cd source
 
 chmod +x configure install-sh
 
+if [[ "${build_platform}" == "win-64" ]]; then
+  export BUILD=x86_64-pc-windows-msvc
+elif [[ "${build_platform}" == "win-arm64" ]]; then
+  export BUILD=aarch64-pc-windows-msvc
+fi
+
+if [[ "${target_platform}" == "win-64" ]]; then
+  export HOST=x86_64-pc-windows-msvc
+elif [[ "${targt_platform}" == "win-arm64" ]]; then
+  export HOST=aarch64-pc-windows-msvc
+fi
+
 EXTRA_OPTS="${EXTRA_OPTS:-}"
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
