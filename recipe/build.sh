@@ -25,7 +25,7 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
       --disable-samples \
       --disable-extras \
       --disable-layout \
-      --disable-tests
+      --disable-tests || (cat config.log; exit 1)
     make -j${CPU_COUNT}
     EXTRA_OPTS="$EXTRA_OPTS --with-cross-build=$PWD"
     popd
