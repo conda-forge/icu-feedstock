@@ -13,6 +13,7 @@ move configure.new configure
 :: rc.exe gets confused with the '/' form of slashes
 set MSYS_RC_MODE=1
 
+set EXTRA_OPTS=--python=%BUILD_PREFIX%/python.exe
 :: 32-bit and VS2015 ends in failure:
 :: uconv.o : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
 :: uconv.o : error LNK2001: unresolved external symbol _uconvmsg_dat
