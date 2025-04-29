@@ -14,7 +14,7 @@ cd source
 
 chmod +x configure install-sh
 
-EXTRA_OPTS=""
+EXTRA_OPTS="${EXTRA_OPTS:-}"
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     mkdir cross_build
