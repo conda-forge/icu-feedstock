@@ -10,6 +10,8 @@ if [[ "${target_platform}" == win-* ]]; then
   export CXXFLAGS="$CXXFLAGS /std:c++17"
 fi
 
+echo ${target_platform} ${build_platform}
+
 cd source
 
 chmod +x configure install-sh
@@ -22,7 +24,7 @@ fi
 
 if [[ "${target_platform}" == "win-64" ]]; then
   export HOST=x86_64-pc-windows-msvc
-elif [[ "${targt_platform}" == "win-arm64" ]]; then
+elif [[ "${target_platform}" == "win-arm64" ]]; then
   export HOST=aarch64-pc-windows-msvc
 fi
 
