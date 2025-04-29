@@ -13,17 +13,6 @@ move configure.new configure
 :: rc.exe gets confused with the '/' form of slashes
 set MSYS_RC_MODE=1
 
-set EXTRA_OPTS=--python=%BUILD_PREFIX%/python.exe
-:: 32-bit and VS2015 ends in failure:
-:: uconv.o : MSIL .netmodule or module compiled with /GL found; restarting link with /LTCG; add /LTCG to the link command line to improve linker performance
-:: uconv.o : error LNK2001: unresolved external symbol _uconvmsg_dat
-:: ../../bin/uconv.exe : fatal error LNK1120: 1 unresolved externals
-:: .. without this
-if "%ARCH%"=="32" (
-  if "%c_compiler%"=="vs2015" (
-    set EXTRA_OPTS=--disable-extras
-  )
-)
 
 :: This directory is needed during the install process but isn't created by the scripts.
 mkdir data\out\tmp
@@ -37,6 +26,7 @@ set MSYSTEM=MINGW%ARCH%
 set MSYS2_PATH_TYPE=inherit
 set CHERE_INVOKING=1
 FOR /F "delims=" %%i in ('cygpath.exe -u "%LIBRARY_PREFIX%"') DO set "PREFIX=%%i"
+FOR /F "delims=" %%i in ('cygpath.exe -u "%BUILD_PREFIX%"') DO set "ac_cv_prog_PYTHON=%%i/python.exe"
 
 set CC=cl.exe
 set CXX=cl.exe
