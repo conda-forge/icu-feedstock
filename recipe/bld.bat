@@ -20,7 +20,8 @@ mkdir data\out\tmp
 echo "build - %build_platform% - %BUILD_PLATFORM%"
 cd ..
 
-copy "%RECIPE_DIR%\build.sh" .
+echo "set build_platform=%build_platform%"  > build.sh
+type "%RECIPE_DIR%\build.sh"               >> build.sh
 set MSYSTEM=MINGW%ARCH%
 set MSYS2_PATH_TYPE=inherit
 set CHERE_INVOKING=1
