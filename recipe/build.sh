@@ -8,6 +8,8 @@ if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
   export PATH="$(dirname "$(which -a link | grep MSVC)"):$PATH"
   export CXXFLAGS="$CXXFLAGS /std:c++17"
+  # Tell it we're building for MSVC
+  cp source/config/mh-msys-msvc source/config/mh-unknown
 fi
 
 echo ${target_platform} ${build_platform}
