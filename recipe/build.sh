@@ -18,16 +18,19 @@ cd source
 
 chmod +x configure install-sh
 
-if [[ "${build_platform}" == "win-64" ]]; then
-  export BUILD=x86_64-pc-windows
-elif [[ "${build_platform}" == "win-arm64" ]]; then
-  export BUILD=aarch64-pc-windows
-fi
+if [[ "${target_platform}" == "win-"* ]]; then
+  sed -i.bak 's/EXEEXT=""/EXEEXT=.exe/g'  source/configure
+  if [[ "${build_platform}" == "win-64" ]]; then
+    export BUILD=x86_64-pc-windows
+  elif [[ "${build_platform}" == "win-arm64" ]]; then
+    export BUILD=aarch64-pc-windows
+  fi
 
-if [[ "${target_platform}" == "win-64" ]]; then
-  export HOST=x86_64-pc-windows
-elif [[ "${target_platform}" == "win-arm64" ]]; then
-  export HOST=aarch64-pc-windows
+  if [[ "${target_platform}" == "win-64" ]]; then
+    export HOST=x86_64-pc-windows
+  elif [[ "${target_platform}" == "win-arm64" ]]; then
+    export HOST=aarch64-pc-windows
+  fi
 fi
 
 EXTRA_OPTS="${EXTRA_OPTS:-}"
