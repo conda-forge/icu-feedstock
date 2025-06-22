@@ -10,17 +10,17 @@ if [[ "${target_platform}" == win-* ]]; then
   export CXXFLAGS="$CXXFLAGS /std:c++17"
   # Tell it we're building for MSVC
   cp source/config/mh-msys-msvc source/config/mh-unknown
-  # EXEXT is wrong for *-pc-windows-msvc
+  # EXEXT is wrong for *-pc--windows
   sed -i.bak 's/EXEEXT=""/EXEEXT=.exe/g'  source/configure
   if [[ "${build_platform}" == "win-64" ]]; then
-    export BUILD=x86_64-pc-windows-msvc
+    export BUILD=x86_64-pc-windows
   elif [[ "${build_platform}" == "win-arm64" ]]; then
-    export BUILD=aarch64-pc-windows-msvc
+    export BUILD=aarch64-pc-windows
   fi
   if [[ "${target_platform}" == "win-64" ]]; then
-    export HOST=x86_64-pc-windows-msvc
+    export HOST=x86_64-pc-windows
   elif [[ "${target_platform}" == "win-arm64" ]]; then
-    export HOST=aarch64-pc-windows-msvc
+    export HOST=aarch64-pc-windows
   fi
 fi
 
