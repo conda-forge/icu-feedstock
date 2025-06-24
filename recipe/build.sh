@@ -11,8 +11,8 @@ if [[ "${target_platform}" == win-* ]]; then
   subst Z: "$CLDIR"
   export CC_FOR_BUILD="Z:/bin/HostX64/x64/cl.exe"
   export CXX_FOR_BUILD="Z:/bin/HostX64/x64/cl.exe"
-  export LIB_FOR_BUILD="$BUILD_PREFIX/Library/lib:Z:/lib/x64"
-  export INCLUDE_FOR_BUILD="$BUILD_PREFIX/Library/include:Z:/lib/include"
+  export LIB_FOR_BUILD="$BUILD_PREFIX/Library/lib;Z:/lib/x64;$LIB"
+  export INCLUDE_FOR_BUILD="$BUILD_PREFIX/Library/include;Z:/lib/include;$INCLUDE"
   echo $LIB_FOR_BUILD
   export CXXFLAGS="$CXXFLAGS /std:c++17"
   # Tell it we're building for MSVC
