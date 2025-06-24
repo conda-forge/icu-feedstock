@@ -7,10 +7,13 @@ set -ex
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
   export PATH="$(dirname "$(which -a link | grep MSVC | head -1)"):$PATH"
-  CLDIR="$(dirname "$(dirname "$(which -a cl | grep MSVC | head -1)")")"
+  CLDIR="$(dirname "$(dirname "$(dirname "$(dirname "$(which -a cl | grep MSVC | head -1)")")")")"
   subst Z: "$CLDIR"
-  export CC_FOR_BUILD="Z:/x64/cl.exe"
-  export CXX_FOR_BUILD="Z:/x64/cl.exe"
+  export CC_FOR_BUILD="Z:/bin/HostX64/x64/cl.exe"
+  export CXX_FOR_BUILD="Z:/bin/HostX64/x64/cl.exe"
+  export LIB_FOR_BUILD="$BUILD_PREFIX/Library/lib:Z:/lib/x64"
+  export INCLUDE_FOR_BUILD="$BUILD_PREFIX/Library/include:Z:/lib/include"
+  echo $LIB_FOR_BUILD
   export CXXFLAGS="$CXXFLAGS /std:c++17"
   # Tell it we're building for MSVC
   cp source/config/mh-msys-msvc source/config/mh-unknown
@@ -39,7 +42,7 @@ EXTRA_OPTS="${EXTRA_OPTS:-}"
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     mkdir cross_build
     pushd cross_build
-    CC=$CC_FOR_BUILD CXX=$CXX_FOR_BUILD AR= AS= LD= CFLAGS= CXXFLAGS= LDFLAGS= CPPFLAGS= ../configure \
+    LIB=$LIB_FOR_BUILD INCLUDE=$INCLUDE_FOR_BUILD CC=$CC_FOR_BUILD CXX=$CXX_FOR_BUILD AR= AS= LD= CFLAGS= CXXFLAGS= LDFLAGS= CPPFLAGS= ../configure \
       --build=${BUILD} \
       --host=${BUILD} \
       --disable-samples \
