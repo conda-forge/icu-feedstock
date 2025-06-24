@@ -6,8 +6,8 @@ set -ex
 
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
-  export PATH="$(dirname "$(which link | grep MSVC)"):$PATH"
-  CLDIR="$(dirname "$(dirname "$(which cl | grep MSVC)")")"
+  export PATH="$(dirname "$(which -a link | grep MSVC | head -1)"):$PATH"
+  CLDIR="$(dirname "$(dirname "$(which -a cl | grep MSVC | head -1)")")"
   subst Z: "$CLDIR"
   export CC_FOR_BUILD="Z:/x64/cl.exe"
   export CXX_FOR_BUILD="Z:/x64/cl.exe"
