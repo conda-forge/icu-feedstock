@@ -15,6 +15,7 @@ if [[ "${target_platform}" == win-* ]]; then
   export INCLUDE_FOR_BUILD="$BUILD_PREFIX/Library/include;$(echo $INCLUDE | sed s/ARM64/x64/g | sed s/arm64/x64/g)"
   echo $LIB_FOR_BUILD
   export CXXFLAGS="$CXXFLAGS /std:c++17"
+  export CXXFLAGS_FOR_BUILD="$CXXFLAGS_FOR_BUILD /std:c++17"
   # Tell it we're building for MSVC
   cp source/config/mh-msys-msvc source/config/mh-unknown
   # EXEXT is wrong for *-pc--windows
@@ -42,7 +43,7 @@ EXTRA_OPTS="${EXTRA_OPTS:-}"
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     mkdir cross_build
     pushd cross_build
-    LIB=$LIB_FOR_BUILD INCLUDE=$INCLUDE_FOR_BUILD CC=$CC_FOR_BUILD CXX=$CXX_FOR_BUILD AR= AS= LD= CFLAGS= CXXFLAGS= LDFLAGS= CPPFLAGS= ../configure \
+    LIB=$LIB_FOR_BUILD INCLUDE=$INCLUDE_FOR_BUILD CC=$CC_FOR_BUILD CXX=$CXX_FOR_BUILD AR= AS= LD= CFLAGS= CXXFLAGS=$CXXFLAGS_FOR_BUILD LDFLAGS= CPPFLAGS= ../configure \
       --build=${BUILD} \
       --host=${BUILD} \
       --disable-samples \
