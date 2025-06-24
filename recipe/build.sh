@@ -7,8 +7,8 @@ set -ex
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
   export PATH="$(dirname "$(which link | grep MSVC)"):$PATH"
-  export CC_FOR_BUILD="$(dirname $(dirname "$(which cl | grep MSVC)"))/x64/cl.exe"
-  export CXX_FOR_BUILD="$(dirname $(dirname "$(which cl | grep MSVC)"))/x64/cl.exe"
+  export CC_FOR_BUILD="$(dirname "$(dirname "$(which cl | grep MSVC)")")/x64/cl.exe"
+  export CXX_FOR_BUILD="$(dirname "$(dirname "$(which cl | grep MSVC)")")/x64/cl.exe"
   export CXXFLAGS="$CXXFLAGS /std:c++17"
   # Tell it we're building for MSVC
   cp source/config/mh-msys-msvc source/config/mh-unknown
