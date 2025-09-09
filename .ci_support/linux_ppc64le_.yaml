@@ -1,5 +1,5 @@
 ace:
-- 8.0.2
+- 8.0.5
 c_compiler:
 - gcc
 c_compiler_version:
@@ -21,7 +21,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 icu:
-- '73'
+- '75'
 target_platform:
 - linux-ppc64le
 zip_keys:

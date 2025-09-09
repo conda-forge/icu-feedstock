@@ -1,5 +1,5 @@
 ace:
-- 8.0.2
+- 8.0.5
 c_compiler:
 - vs2022
 c_stdlib:
@@ -11,6 +11,6 @@ channel_targets:
 cxx_compiler:
 - vs2022
 icu:
-- '73'
+- '75'
 target_platform:
 - win-64

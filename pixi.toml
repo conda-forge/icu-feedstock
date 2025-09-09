@@ -7,7 +7,7 @@
 
 [project]
 name = "icu-feedstock"
-version = "3.50.1"  # conda-smithy version used to generate this file
+version = "3.52.1"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/icu-feedstock"
 authors = ["@conda-forge/icu"]
 channels = ["conda-forge"]
@@ -94,6 +94,7 @@ description = "List contents of icu-feedstock packages built for variant win_arm
 
 [feature.smithy.dependencies]
 conda-smithy = "*"
+shellcheck = "*"
 [feature.smithy.tasks.build-locally]
 cmd = "python ./build-locally.py"
 description = "Build packages locally using the same setup scripts used in conda-forge's CI"
