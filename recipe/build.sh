@@ -71,7 +71,7 @@ fi
             --disable-extras      \
             --disable-layout      \
             --disable-tests       \
-	    ${EXTRA_OPTS}  || (cat config.log; exit 1)
+            ${EXTRA_OPTS} || (cat config.log; exit 1)
 
 make -j${CPU_COUNT} ${VERBOSE_CM}
 if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
