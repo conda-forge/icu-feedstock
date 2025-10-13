@@ -4,6 +4,8 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
+which link
+
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
   #export PATH="$(dirname "$(which -a link | grep MSVC | head -1)"):$PATH"
