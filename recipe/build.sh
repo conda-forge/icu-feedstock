@@ -8,15 +8,7 @@ which link
 
 if [[ "${target_platform}" == win-* ]]; then
   # Ensure that MSVC come before MSYS2
-  #export PATH="$(dirname "$(which -a link | grep MSVC | head -1)"):$PATH"
-  CLDIR="$(dirname "$(dirname "$(which -a cl | grep MSVC | head -1)")")"
-  subst Z: "$CLDIR"
-  export CC_FOR_BUILD="Z:/x64/cl.exe"
-  export CXX_FOR_BUILD="Z:/x64/cl.exe"
-  export LIB_FOR_BUILD="$BUILD_PREFIX/Library/lib;$(echo $LIB | sed s/ARM64/x64/g | sed s/arm64/x64/g)"
-  export INCLUDE_FOR_BUILD="$BUILD_PREFIX/Library/include;$(echo $INCLUDE | sed s/ARM64/x64/g | sed s/arm64/x64/g)"
-  export LDFLAGS_FOR_BUILD="$LDFLAGS /MACHINE:x64"
-  echo $LIB_FOR_BUILD
+  export PATH="$(dirname "$(which -a link | grep MSVC | head -1)"):$PATH"
   export CXXFLAGS="$CXXFLAGS /std:c++17"
   export CXXFLAGS_FOR_BUILD="$CXXFLAGS_FOR_BUILD /std:c++17"
   # Tell it we're building for MSVC
