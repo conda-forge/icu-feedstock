@@ -1,14 +1,12 @@
-{% set version = "75.1" %}
-{% set version_under = version.replace(".", "_") %}
-{% set version_hyphen = version.replace(".", "-") %}
+{% set version = "78.2" %}
 
 package:
   name: icu
   version: {{ version }}
 
 source:
-  - url: https://github.com/unicode-org/icu/releases/download/release-{{ version_hyphen }}/icu4c-{{ version_under }}-src.tgz
-    sha256: cb968df3e4d2e87e8b11c49a5d01c787bd13b9545280fc6642f826527618caef
+  - url: https://github.com/unicode-org/icu/releases/download/release-{{ version }}/icu4c-{{ version }}-sources.tgz
+    sha256: 3e99687b5c435d4b209630e2d2ebb79906c984685e78635078b672e03c89df35
     patches:
       # Include an extra header when using mingw.
       - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
@@ -16,8 +14,8 @@ source:
       - icu-config.patch  # [win]
       - mach-port-t.patch  # [osx]
 
-  - url: https://github.com/unicode-org/icu/releases/download/release-{{ version_hyphen }}/icu4c-{{ version_under }}-data.zip
-    sha256: a5104212dc317a64f9b035723ea706f2f4fd5a0f37b7923fae7aeb9d1d0061b1
+  - url: https://github.com/unicode-org/icu/releases/download/release-{{ version }}/icu4c-{{ version }}-data.zip
+    sha256: 582968cf174c9498b2046b4f4e7f786def5f18222bd8d98432d7a29399c38c70
     folder: source/data
 
 build:
