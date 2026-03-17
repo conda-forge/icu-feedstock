@@ -1,4 +1,4 @@
-{% set version = "78.2" %}
+{% set version = "78.3" %}
 
 package:
   name: icu
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://github.com/unicode-org/icu/releases/download/release-{{ version }}/icu4c-{{ version }}-sources.tgz
-    sha256: 3e99687b5c435d4b209630e2d2ebb79906c984685e78635078b672e03c89df35
+    sha256: 3a2e7a47604ba702f345878308e6fefeca612ee895cf4a5f222e7955fabfe0c0
     patches:
       # Include an extra header when using mingw.
       - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch  # [win]
@@ -15,7 +15,7 @@ source:
       - mach-port-t.patch  # [osx]
 
   - url: https://github.com/unicode-org/icu/releases/download/release-{{ version }}/icu4c-{{ version }}-data.zip
-    sha256: 582968cf174c9498b2046b4f4e7f786def5f18222bd8d98432d7a29399c38c70
+    sha256: 9d8b3899096aeb83e4e21ef8a40fec9e03b28db18c48452efac882ce25a91e27
     folder: source/data
 
 build:
