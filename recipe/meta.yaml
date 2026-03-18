@@ -2,7 +2,7 @@
 
 package:
   name: icu
-  version: {{ version }}
+  version: "{{ version }}"
 
 source:
   - url: https://github.com/unicode-org/icu/releases/download/release-{{ version }}/icu4c-{{ version }}-sources.tgz
