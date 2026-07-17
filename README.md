@@ -3,7 +3,7 @@ About icu-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/icu-feedstock/blob/main/LICENSE.txt)
 
-Home: https://icu.unicode.org
+Home: https://icu.unicode.org/
 
 Package license: MIT
 
