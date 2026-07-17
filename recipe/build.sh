@@ -4,6 +4,14 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
+# Merge the extra ICU data source into source/data, overwriting any
+# placeholder project files that already shipped in the sources tarball.
+# rattler-build's target_directory extraction refuses to overwrite existing
+# files (unlike conda-build's folder key, which merges silently), so the
+# data.zip archive is extracted to $SRC_DIR/icu-data-src instead and merged
+# here manually.
+cp -rf "${SRC_DIR}/icu-data-src/." "${SRC_DIR}/source/data/"
+
 which link
 
 if [[ "${target_platform}" == win-* ]]; then

@@ -1,4 +1,14 @@
 SETLOCAL EnableDelayedExpansion
+
+:: Merge the extra ICU data source into source\data, overwriting any
+:: placeholder project files that already shipped in the sources tarball.
+:: rattler-build's target_directory extraction refuses to overwrite existing
+:: files (unlike conda-build's folder key, which merges silently), so the
+:: data.zip archive is extracted to %SRC_DIR%\icu-data-src instead and
+:: merged here manually, before source\data is touched by anything else.
+xcopy /E /Y /I "%SRC_DIR%\icu-data-src" "%SRC_DIR%\source\data"
+if errorlevel 1 exit 1
+
 cd source
 
 :: Remove all instances of /W4 from configure.

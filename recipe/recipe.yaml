@@ -21,7 +21,7 @@ source:
         then: mach-port-t.patch
   - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-data.zip
     sha256: 9d8b3899096aeb83e4e21ef8a40fec9e03b28db18c48452efac882ce25a91e27
-    target_directory: source/data
+    target_directory: icu-data-src
 
 build:
   number: 1
@@ -69,4 +69,3 @@ extra:
     - msarahan
     - ocefpaf
     - xhochy
-
