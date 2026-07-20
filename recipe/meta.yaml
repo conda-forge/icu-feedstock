@@ -43,12 +43,14 @@ requirements:
 
 test:
   requires:
+    - {{ compiler('c') }}
     - pkg-config
   files:
     # From http://source.icu-project.org/repos/icu/data/trunk/charset/data/ucm/gb-18030-2000.ucm
     - gb-18030-2000.ucm
     # From ICU's data folder.
     - de.txt
+    - test.c
   commands:
     # Libraries
     {% set libs = [
@@ -75,9 +77,12 @@ test:
     - icu-config --help  # [not win]
     - makeconv gb-18030-2000.ucm
     - pkg-config --print-errors --exact-version "{{ version }}" icu-uc
-    - pkg-config --libs --static icu-uc
-    - pkg-config --libs --static icu-uc > pkg-config-libs.txt  # [win]
-    - findstr /C:"-lm" /C:"m.lib" pkg-config-libs.txt && exit 1 || exit 0  # [win]
+    - $CC $CFLAGS $LDFLAGS test.c $(pkg-config --cflags --libs --static icu-uc) -o test  # [unix]
+    - ./test  # [unix]
+    - for /f "usebackq tokens=*" %%a in (`pkg-config --cflags icu-uc`) do set "PC_CFLAGS=%%a"  # [win]
+    - for /f "usebackq tokens=*" %%a in (`pkg-config --msvc-syntax --libs --static icu-uc`) do set "PC_LIBS=%%a"  # [win]
+    - %CC% %CFLAGS% %LDFLAGS% %PC_CFLAGS% %PC_LIBS% test.c  # [win]
+    - test.exe  # [win]
 
 about:
   home: https://icu.unicode.org
