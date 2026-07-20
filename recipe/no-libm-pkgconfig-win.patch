@@ -1,0 +1,22 @@
+--- source/configure.ac.orig	2026-03-18 03:44:50
++++ source/configure.ac	2026-07-19 10:03:38
+@@ -260,6 +260,8 @@
+ #  PIC (at least on 10.2)
+ case "${host}" in
+ 	*-*-hpux*) 	AC_CHECK_LIB(m, floor, LIB_M="-lm") ;;
++
++	*-*-windows*)	LIB_M="" ;;
+ 
+ 	*) 		AC_CHECK_LIB(m, floor)
+ 			LIB_M="" ;;
+--- source/configure.orig	2026-03-18 03:44:50
++++ source/configure	2026-07-19 10:04:19
+@@ -5895,6 +5895,8 @@
+   LIB_M="-lm"
+ fi
+  ;;
++
++	*-*-windows*)	LIB_M="" ;;
+ 
+ 	*) 		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for floor in -lm" >&5
+ printf %s "checking for floor in -lm... " >&6; }
