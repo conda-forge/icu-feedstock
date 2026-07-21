@@ -17,6 +17,8 @@ source:
           - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch
           # Omit lib prefix on libraries.
           - icu-config.patch
+          # Avoid exporting Unix libm through pkg-config on Windows.
+          - no-libm-pkgconfig-win.patch  # [win]
       - if: osx
         then: mach-port-t.patch
   - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-data.zip
@@ -24,7 +26,7 @@ source:
     target_directory: icu-data-src
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -48,7 +50,11 @@ requirements:
     - ${{ pin_subpackage('icu') }}
 
 tests:
-  - script: ${{ 'run_test.sh' if not win else '' }}
+  - script: ${{ 'run_test.sh' if not win else 'run_test.bat' }}
+    requirements:
+      run:
+        - ${{ compiler('c') }}
+        - pkg-config
     files:
       recipe:
         - gb-18030-2000.ucm

@@ -10,7 +10,7 @@ set -ex
 # files (unlike conda-build's folder key, which merges silently), so the
 # data.zip archive is extracted to $SRC_DIR/icu-data-src instead and merged
 # here manually.
-cp -rf "${SRC_DIR}/icu-data-src/." "${SRC_DIR}/source/data/"
+cp -af "${SRC_DIR}/icu-data-src/." "${SRC_DIR}/source/data/"
 
 which link
 
