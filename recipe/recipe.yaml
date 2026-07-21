@@ -52,7 +52,9 @@ requirements:
     - ${{ pin_subpackage('icu') }}
 
 tests:
-  - script: ${{ 'run_test.sh' if not win else 'run_test.bat' }}
+  - script:
+      # Extensionless: rattler-build appends .sh (Unix) or .bat (Windows).
+      file: run_test
     requirements:
       run:
         - ${{ compiler('c') }}
@@ -61,6 +63,7 @@ tests:
       recipe:
         - gb-18030-2000.ucm
         - de.txt
+        - test.c
 
 about:
   license: MIT

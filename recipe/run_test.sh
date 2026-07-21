@@ -25,5 +25,5 @@ icu-config --help
 makeconv gb-18030-2000.ucm
 
 pkg-config --print-errors --exact-version "$PKG_VERSION" icu-uc
-$CC $CFLAGS $LDFLAGS "$RECIPE_DIR/test.c" $(pkg-config --cflags --libs --static icu-uc) -o test
+$CC $CFLAGS $LDFLAGS test.c $(pkg-config --cflags --libs --static icu-uc) -o test
 ./test
