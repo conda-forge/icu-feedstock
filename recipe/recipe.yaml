@@ -42,6 +42,8 @@ requirements:
         - m2-coreutils
     - if: unix
       then:
+        # Needed to generate data/rules.mk at configure time (ICU >= 78).
+        - python
         - libtool
         - make
   host:
