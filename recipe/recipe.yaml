@@ -18,7 +18,7 @@ source:
           # Omit lib prefix on libraries.
           - icu-config.patch
           # Avoid exporting Unix libm through pkg-config on Windows.
-          - no-libm-pkgconfig-win.patch  # [win]
+          - no-libm-pkgconfig-win.patch
       - if: osx
         then: mach-port-t.patch
   - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-data.zip
