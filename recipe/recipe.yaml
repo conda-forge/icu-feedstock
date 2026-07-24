@@ -1,0 +1,82 @@
+schema_version: 1
+
+context:
+  version: "78.3"
+
+package:
+  name: icu
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-sources.tgz
+    sha256: 3a2e7a47604ba702f345878308e6fefeca612ee895cf4a5f222e7955fabfe0c0
+    patches:
+      - if: win
+        then:
+          # Include an extra header when using mingw.
+          - icu4c-4_9_1-mingw-w64-mkdir-compatibility.patch
+          # Omit lib prefix on libraries.
+          - icu-config.patch
+          # Avoid exporting Unix libm through pkg-config on Windows.
+          - no-libm-pkgconfig-win.patch
+      - if: osx
+        then: mach-port-t.patch
+  - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-data.zip
+    sha256: 9d8b3899096aeb83e4e21ef8a40fec9e03b28db18c48452efac882ce25a91e27
+    target_directory: icu-data-src
+
+build:
+  number: 2
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+    - if: win
+      then:
+        - python 3.11.*
+        - m2-base
+        - m2-make
+        - m2-sed
+        - m2-coreutils
+    - if: unix
+      then:
+        # Needed to generate data/rules.mk at configure time (ICU >= 78).
+        - python
+        - libtool
+        - make
+  host:
+  run:
+  run_exports:
+    - ${{ pin_subpackage('icu') }}
+
+tests:
+  - script:
+      # Extensionless: rattler-build appends .sh (Unix) or .bat (Windows).
+      file: run_test
+    requirements:
+      run:
+        - ${{ compiler('c') }}
+        - pkg-config
+    files:
+      recipe:
+        - gb-18030-2000.ucm
+        - de.txt
+        - test.c
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: International Components for Unicode.
+  homepage: https://icu.unicode.org
+  repository: https://github.com/unicode-org/icu
+  documentation: https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/
+
+extra:
+  recipe-maintainers:
+    - ccordoba12
+    - jakirkham
+    - msarahan
+    - ocefpaf
+    - xhochy

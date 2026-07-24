@@ -4,6 +4,14 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* ./source
 
 set -ex
 
+# Merge the extra ICU data source into source/data, overwriting any
+# placeholder project files that already shipped in the sources tarball.
+# rattler-build's target_directory extraction refuses to overwrite existing
+# files (unlike conda-build's folder key, which merges silently), so the
+# data.zip archive is extracted to $SRC_DIR/icu-data-src instead and merged
+# here manually.
+cp -af "${SRC_DIR}/icu-data-src/." "${SRC_DIR}/source/data/"
+
 which link
 
 if [[ "${target_platform}" == win-* ]]; then
@@ -34,6 +42,13 @@ cd source
 chmod +x configure install-sh
 
 EXTRA_OPTS="${EXTRA_OPTS:-}"
+
+# rattler-build exports PYTHON=$PREFIX/bin/python (host). ICU's configure
+# needs a runnable interpreter to generate data/rules.mk, so point it at
+# the build-env Python instead. Windows sets ac_cv_prog_PYTHON in build.bat.
+if [[ "${target_platform}" != win-* ]]; then
+  export PYTHON="${BUILD_PREFIX}/bin/python"
+fi
 
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
     mkdir cross_build
