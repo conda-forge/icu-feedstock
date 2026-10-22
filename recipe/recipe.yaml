@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "78.3"
+  version: "79.1"
 
 package:
   name: icu
@@ -9,7 +9,7 @@ package:
 
 source:
   - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-sources.tgz
-    sha256: 3a2e7a47604ba702f345878308e6fefeca612ee895cf4a5f222e7955fabfe0c0
+    sha256: 06fa63ecb521048f8082f12ad988f6b678d90cbd88aafce24cbc94902b191d99
     patches:
       - if: win
         then:
@@ -22,11 +22,11 @@ source:
       - if: osx
         then: mach-port-t.patch
   - url: https://github.com/unicode-org/icu/releases/download/release-${{ version }}/icu4c-${{ version }}-data.zip
-    sha256: 9d8b3899096aeb83e4e21ef8a40fec9e03b28db18c48452efac882ce25a91e27
+    sha256: b3a430009bb5fab77b1a4b98fab85cc8f887e26d4e4166121724298ae14d7224
     target_directory: icu-data-src
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
